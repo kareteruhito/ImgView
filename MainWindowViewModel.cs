@@ -8,11 +8,8 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Reactive.Bindings.Extensions;
-using System.Data;
-using System.Windows.Media;
 using System.Windows.Input;
 using System.Linq;
-using Reactive.Bindings.ObjectExtensions;
 
 using System.IO;
 using System.Reactive.Linq;

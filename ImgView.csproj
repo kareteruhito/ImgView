@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <NoWarn>NU1701</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

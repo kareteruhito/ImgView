@@ -1,18 +1,11 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using System.Drawing;
-using System.Runtime.ExceptionServices;
-using System.Windows.Media.Animation;
-using System.Drawing.Imaging;
 using System.Windows.Media;
 using System.Windows;
-using System.Reflection.Metadata;
 
 namespace ImgView
 {
