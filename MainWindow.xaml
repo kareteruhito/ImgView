@@ -1,0 +1,95 @@
+<Window
+  x:Class="ImgView.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
+  xmlns:interactivity="clr-namespace:Reactive.Bindings.Interactivity;assembly=ReactiveProperty.WPF"
+  xmlns:local="clr-namespace:ImgView"
+  mc:Ignorable="d"
+  WindowStyle="{Binding WinStyle.Value}"
+  WindowState="{Binding WinState.Value}"
+  Title="{Binding Titlebar.Value}" Height="450" Width="800">
+  <Window.DataContext>
+    <local:MainWindowViewModel />
+  </Window.DataContext>
+  <Window.InputBindings>
+    <KeyBinding Gesture="F11" Command="{Binding FullScreenCommand}"/>
+    <KeyBinding Gesture="F5" Command="{Binding EditCommand}"/>
+  </Window.InputBindings>
+  <i:Interaction.Behaviors>
+    <local:ViewModelCleanupBehavior />
+  </i:Interaction.Behaviors>
+    <DockPanel>
+        <StackPanel
+            DockPanel.Dock="Left"
+            Visibility="{Binding PlaylistVisibility.Value}"
+            Margin="10">
+            <Label>プレイリスト</Label>
+            <ListBox
+                Height="300"
+                DisplayMemberPath="Name"
+                SelectedValuePath="Id"
+                SelectedValue="{Binding PlaylistSelected.Value}"
+                SelectedIndex="{Binding PlaylistIndex.Value}"
+                ItemsSource="{Binding PlaylistItems}">
+            </ListBox>
+            <WrapPanel
+                Orientation="Horizontal"
+                Margin="10">
+                <Button Content="開始"
+                        Command="{Binding StartCommandAsync}" />
+                <Button Content="削除"
+                        Command="{Binding RemoveCommand}" />
+                <Button Content="クリア"
+                        Command="{Binding ClearCommand}" />
+                <Button Content="上へ"
+                        Command="{Binding UpCommand}" />
+                <Button Content="下へ"
+                        Command="{Binding DownCommand}" />
+                <Button Content="保存"
+                        Command="{Binding SaveCommand}" />
+                <Button Content="開く"
+                        Command="{Binding OpenCommand}" />
+            </WrapPanel>
+        </StackPanel>
+        <!-- <StackPanel
+            SizeChanged="StackPanel_SizeChanged"
+            Background="Black"
+            AllowDrop="True"> -->
+        <StackPanel
+            Background="Black"
+            AllowDrop="True">
+            <i:Interaction.Behaviors>
+                <local:DragOverBehavior />
+            </i:Interaction.Behaviors>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <interactivity:EventToReactiveCommand Command="{Binding LoadCommand}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="Drop">
+                    <interactivity:EventToReactiveCommand Command="{Binding DropCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Canvas>
+                <!-- <Image  Name="Image1"
+                        RenderOptions.BitmapScalingMode="NearestNeighbor"
+                        Stretch="Uniform"
+                        Source="{Binding PictureView.Value}"> -->
+                <Image  Name="Image1"
+                        RenderOptions.BitmapScalingMode="NearestNeighbor"
+                        Stretch="Uniform"
+                        Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=StackPanel}}"
+                        Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=StackPanel}}"
+                        Source="{Binding PictureView.Value}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <interactivity:EventToReactiveCommand Command="{Binding MouseDownCommandAsync}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Canvas>
+        </StackPanel>
+    </DockPanel>
+</Window>
