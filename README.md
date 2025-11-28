@@ -50,6 +50,6 @@ https://maywork.net/computer/github-app-clone-build-install/
 ### 1. GitHub からクローン
 
 ```powershell
-git clone https://github.com/あなた/ImgView.git
+git clone https://github.com/kareteruhito/ImgView.git
 cd ImgView
 dotnet run
